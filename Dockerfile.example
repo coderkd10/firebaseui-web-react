@@ -1,0 +1,25 @@
+ARG NODE_VERSION=14
+
+FROM node:${NODE_VERSION} as builder
+
+USER node
+WORKDIR /home/node/app
+
+# copy package.json and package-lock.json
+COPY --chown=node example/package*.json ./example/
+RUN cd example && npm install
+
+# to make debugging temporarily easier
+USER root
+RUN apt update && apt install -y vim sudo
+# so that we can sudo from node user
+RUN passwd -d node && adduser node sudo
+
+USER node
+COPY --chown=node . ./
+
+# try building example
+RUN cd example && npm run build
+
+EXPOSE 8000
+CMD [ "python3", "-m", "http.server", "--directory", "example/public", "8000" ]
