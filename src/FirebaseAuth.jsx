@@ -58,8 +58,8 @@ export default class FirebaseAuth extends React.Component {
     // This can happen if you unmount/remount the element quickly.
     return firebaseUiDeletion.then(() => {
       // Get or Create a firebaseUI instance.
-      this.firebaseUiWidget = firebaseui.auth.AuthUI.getInstance()
-           || new firebaseui.auth.AuthUI(this.firebaseAuth);
+      this.firebaseUiWidget = firebaseui.auth.AuthUI.getInstance() ||
+           new firebaseui.auth.AuthUI(this.firebaseAuth);
       if (this.uiConfig.signInFlow === 'popup') {
         this.firebaseUiWidget.reset();
       }
