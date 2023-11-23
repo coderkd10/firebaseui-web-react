@@ -1,6 +1,7 @@
-ARG NODE_VERSION=16
+ARG NODE_VERSION=14
 
 FROM node:${NODE_VERSION} as builder
+
 USER node
 WORKDIR /home/node/app
 
@@ -8,13 +9,14 @@ WORKDIR /home/node/app
 COPY package*.json ./
 RUN npm install
 
-# copy files required for npm run build
-COPY .babelrc webpack.config.js README.md LICENSE ./
-COPY src ./src
-COPY types ./types
+COPY --chown=node . ./
 
-RUN npm run build
+RUN npm run lint
+
+RUN npm run clean \
+    && npm run build
 
 # pack will generate tarball with filename $name-$version.tgz
 RUN  mkdir ../build \
-    && npm pack --json --pack-destination ../build ./dist > ../build/pack-log.json
+    && npm pack --json ./dist > ../build/pack-log.json \
+    && mv react-firebaseui-6.0.0.tgz ../build/
