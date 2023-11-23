@@ -20,7 +20,7 @@
   "scripts": {
     "lint": "eslint src --ext .js,.jsx",
     "clean": "rm -rf ./dist",
-    "build": "webpack --mode development && babel src --out-dir dist -s && cp ./types/* README.md LICENSE package.json dist",
+    "build": "webpack --mode production && babel src --out-dir dist -s && cp ./types/* README.md LICENSE package.json dist && cd dist && npm install --only=production && cd -",
     "pub": "npm run clean && npm run build && npm publish dist"
   },
   "author": "Google",
