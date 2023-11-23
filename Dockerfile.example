@@ -1,0 +1,22 @@
+ARG NODE_VERSION=14
+
+FROM node:${NODE_VERSION}
+RUN apt update
+
+USER node
+WORKDIR /home/node/app
+
+# copy package.json and package-lock.json
+COPY --chown=node example/package*.json ./example/
+RUN cd example && npm install
+
+COPY --chown=node example ./example
+# build example
+RUN cd example && npm run build
+
+# copy everything for git to work inside container
+COPY --chown=node . ./
+
+# start the static server
+EXPOSE 8000
+CMD [ "python3", "-m", "http.server", "--directory", "example/public", "8000" ]
