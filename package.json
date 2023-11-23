@@ -60,7 +60,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-standard": "^5.0.0",
     "react": "^18",
     "style-loader": "^3.3.3",
     "webpack": "^5.89.0",
