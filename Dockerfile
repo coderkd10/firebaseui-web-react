@@ -2,8 +2,6 @@ ARG NODE_VERSION=14
 
 FROM node:${NODE_VERSION} as builder
 
-RUN apt update && apt install -y vim
-
 USER node
 WORKDIR /home/node/app
 
@@ -12,6 +10,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY --chown=node . ./
+
+RUN npm run lint
 
 RUN npm run clean \
     && npm run build
