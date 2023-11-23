@@ -1,9 +1,7 @@
 {
   "scripts": {
     "clean": "rm -rf ./public/bundle.*",
-    "build": "npm run clean; NODE_ENV=production webpack -p;",
-    "createfirebaseconf": "firebase apps:sdkconfig web --json > ./src/firebase-config.json",
-    "serve": "firebase serve"
+    "build": "NODE_ENV=development webpack"
   },
   "dependencies": {
     "firebase": "^9.1.3",

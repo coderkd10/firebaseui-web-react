@@ -1,6 +1,7 @@
 ARG NODE_VERSION=14
 
-FROM node:${NODE_VERSION} as builder
+FROM node:${NODE_VERSION}
+RUN apt update
 
 USER node
 WORKDIR /home/node/app
@@ -9,17 +10,13 @@ WORKDIR /home/node/app
 COPY --chown=node example/package*.json ./example/
 RUN cd example && npm install
 
-# to make debugging temporarily easier
-USER root
-RUN apt update && apt install -y vim sudo
-# so that we can sudo from node user
-RUN passwd -d node && adduser node sudo
-
-USER node
-COPY --chown=node . ./
-
-# try building example
+COPY --chown=node example ./example
+# build example
 RUN cd example && npm run build
 
+# copy everything for git to work inside container
+COPY --chown=node . ./
+
+# start the static server
 EXPOSE 8000
 CMD [ "python3", "-m", "http.server", "--directory", "example/public", "8000" ]
