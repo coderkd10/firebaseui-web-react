@@ -35,7 +35,7 @@ const config = {
     reasons: true,
     chunks: true,
   },
-  plugins: [new MiniCssExtractPlugin('./bundle.css')],
+  plugins: [new MiniCssExtractPlugin({filename: './bundle.css'})],
   module: {
     rules: [
       {
@@ -47,40 +47,32 @@ const config = {
       {
         test: /\.css$/,
         exclude: [/\.global\./, /node_modules/],
-        loader: MiniCssExtractPlugin.extract(
+        use: [
+          MiniCssExtractPlugin.loader,
           {
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1,
-                  modules: true,
-                  autoprefixer: true,
-                  minimize: true,
-                  localIdentName: '[name]__[local]___[hash:base64:5]',
-                },
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]'
               },
-            ],
-          }),
+            },
+          }
+        ],
       },
       {
         test: /\.css/,
         include: [/\.global\./, /node_modules/],
-        loader: MiniCssExtractPlugin.extract(
+        use: [
+          MiniCssExtractPlugin.loader,
           {
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1,
-                  modules: false,
-                  minimize: true,
-                },
-              },
-            ],
-          }),
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: false,
+            },
+          }
+        ]
       },
     ],
   },
