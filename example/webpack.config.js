@@ -16,7 +16,7 @@
 'use strict';
 
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   context: __dirname,
@@ -35,7 +35,7 @@ const config = {
     reasons: true,
     chunks: true,
   },
-  plugins: [new ExtractTextPlugin('./bundle.css')],
+  plugins: [new MiniCssExtractPlugin('./bundle.css')],
   module: {
     rules: [
       {
@@ -47,7 +47,7 @@ const config = {
       {
         test: /\.css$/,
         exclude: [/\.global\./, /node_modules/],
-        loader: ExtractTextPlugin.extract(
+        loader: MiniCssExtractPlugin.extract(
           {
             fallback: 'style-loader',
             use: [
@@ -67,7 +67,7 @@ const config = {
       {
         test: /\.css/,
         include: [/\.global\./, /node_modules/],
-        loader: ExtractTextPlugin.extract(
+        loader: MiniCssExtractPlugin.extract(
           {
             fallback: 'style-loader',
             use: [
