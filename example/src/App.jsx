@@ -5,7 +5,14 @@ import ReactDOM from 'react-dom';
 import styles from './app.css'; // This uses CSS modules.
 import './firebaseui-styling.global.css'; // Import globally.
 
+// debug
+import doDebug from './adebug';
+
 class App extends React.Component {
+  componentDidMount() {
+    doDebug();
+  }
+
   render() {
     return (
       <div className={styles.container}>

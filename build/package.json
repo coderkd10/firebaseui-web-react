@@ -1,0 +1,9 @@
+{
+    "name": "tmp-abhishek-debug",
+    "version": "0.0.1",
+    "private": true,
+    "peerDependencies": {
+        "react": ">=15 <19"
+    }
+}
+ 

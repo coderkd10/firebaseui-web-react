@@ -5,15 +5,16 @@
   },
   "dependencies": {
     "react": "^17",
-    "react-dom": "^17"
+    "react-dom": "^17",
+    "tmp-abhishek-debug": "file:../build"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
     "@babel/core": "^7.23.3",
-    "babel-loader": "^9.1.3",
     "@babel/plugin-transform-class-properties": "^7.23.3",
     "@babel/preset-env": "^7.23.3",
     "@babel/preset-react": "^7.23.3",
+    "babel-loader": "^9.1.3",
     "css-loader": "^6.8.1",
     "mini-css-extract-plugin": "^2.7.6",
     "style-loader": "^3.3.3",
