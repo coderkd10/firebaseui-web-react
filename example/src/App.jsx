@@ -8,6 +8,7 @@ import './firebaseui-styling.global.css'; // Import globally.
 // debug
 import doDebug from './adebug';
 import F1 from 'tmp-abhishek-debug/dd18_wp5_njx_nolibname/StyledFirebaseAuth';
+import F2 from 'tmp-abhishek-debug/dd18_wp5_jsx_nolibname/StyledFirebaseAuth';
 
 class App extends React.Component {
   componentDidMount() {
@@ -25,6 +26,7 @@ class App extends React.Component {
           <div>
             <span>TESTING!</span>
             <F1 />
+            <F2 />
           </div>
         }
       </div>

@@ -20,7 +20,7 @@ const path = require('path');
 const config = {
   context: __dirname,
 
-  entry: './src/FirebaseAuth.js',
+  entry: './src/FirebaseAuth.jsx',
   output: {
     filename: 'StyledFirebaseAuth.js',
     path: path.resolve(__dirname, './dist'),
@@ -43,12 +43,12 @@ const config = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.jsx?$/,
-      //   loader: 'babel-loader',
-      //   exclude: /node_modules/,
-      //   include: path.resolve(__dirname, './src'),
-      // },
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        include: path.resolve(__dirname, './src'),
+      },
       {
         test: /\.css/,
         include: /node_modules/,
