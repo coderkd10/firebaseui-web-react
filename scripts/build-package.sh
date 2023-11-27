@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
 docker build -t firebaseui-web-react:build .
 docker create --name extract firebaseui-web-react:build
