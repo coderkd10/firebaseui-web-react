@@ -1,4 +1,4 @@
-ARG NODE_VERSION=14
+ARG NODE_VERSION=16
 
 FROM node:${NODE_VERSION}
 RUN apt update
@@ -6,6 +6,13 @@ RUN apt update
 USER node
 WORKDIR /home/node/app
 
+## build dist
+COPY --chown=node package*.json ./
+RUN npm install
+COPY --chown=node . ./
+RUN npm run clean && npm run build
+
+## continue example
 # copy package.json and package-lock.json
 COPY --chown=node example/package*.json ./example/
 RUN cd example && npm install
