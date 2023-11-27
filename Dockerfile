@@ -8,7 +8,7 @@ WORKDIR /home/node/app
 # copy package.json and package-lock.json
 COPY --chown=node package.json ./
 RUN npm install
-RUN npm install --save-dev babel-loader@^7 webpack-cli@^4
+RUN npm install --save-dev webpack-cli
 
 COPY --chown=node . ./
 
@@ -16,7 +16,7 @@ RUN npm run clean \
     && npm run build
 
 # generate asset for export
-ARG OUT_DIRNAME=dm18_nonjsx
+ARG OUT_DIRNAME=dd18_wp5_njx
 RUN mkdir ../build \
     && cd ../build \
     && mkdir ${OUT_DIRNAME} \
