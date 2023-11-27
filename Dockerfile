@@ -6,17 +6,22 @@ USER node
 WORKDIR /home/node/app
 
 # copy package.json and package-lock.json
-COPY package*.json ./
-RUN npm install
+COPY --chown=node package.json ./
+RUN npm install && mv package-lock.json ../
 
 COPY --chown=node . ./
-
-RUN npm run lint
 
 RUN npm run clean \
     && npm run build
 
-# pack will generate tarball with filename $name-$version.tgz
-RUN  mkdir ../build \
-    && npm pack --json ./dist > ../build/pack-log.json \
-    && mv react-firebaseui-6.0.0.tgz ../build/
+# generate asset for export
+ARG OUT_DIRNAME=dm14
+RUN mkdir ../build \
+    && cd ../build \
+    && mkdir ${OUT_DIRNAME} \
+    && cd ${OUT_DIRNAME} \
+    && cp ../../app/dist/FirebaseAuth.js . \
+    && cp ../../app/dist/StyledFirebaseAuth.js . \
+    && cp ../../app/dist/index.js . \
+    && cd ../.. \
+    && tar -czvf build.tar.gz build/

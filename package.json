@@ -18,10 +18,8 @@
   ],
   "main": "index.js",
   "scripts": {
-    "lint": "eslint . --ext .js,.jsx --ignore-pattern dist/",
     "clean": "rm -rf ./dist",
-    "build": "webpack -p && babel src --out-dir dist -s && cp ./types/* README.md LICENSE package.json dist && cd dist && npm install --only=production && cd -",
-    "pub": "npm run clean && npm run build && npm publish dist"
+    "build": "NODE_ENV=development webpack --mode development && babel src --out-dir dist -s"
   },
   "author": "Google",
   "repository": {
