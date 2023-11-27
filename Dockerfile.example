@@ -1,0 +1,24 @@
+ARG NODE_VERSION=16
+
+FROM node:${NODE_VERSION}
+RUN apt update
+
+USER node
+WORKDIR /home/node/app
+
+# copy files from dist
+COPY --chown=node dist ./dist/
+RUN cd dist && rm package-lock.json && npm install --only=production
+
+# copy package.json and package-lock.json
+COPY --chown=node example/package.json ./example/
+RUN cd example && npm install
+RUN cd example && npm install ../dist
+
+COPY --chown=node example ./example
+# build example
+RUN cd example && npm run build
+
+# start the static server
+EXPOSE 8000
+CMD [ "python3", "-m", "http.server", "--directory", "example/public", "8000" ]
