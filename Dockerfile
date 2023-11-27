@@ -16,7 +16,7 @@ RUN npm run clean \
     && npm run build
 
 # generate asset for export
-ARG OUT_DIRNAME=dd18_wp5_njx
+ARG OUT_DIRNAME=dd18_wp5_njx_nolibname
 RUN mkdir ../build \
     && cd ../build \
     && mkdir ${OUT_DIRNAME} \

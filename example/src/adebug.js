@@ -5,12 +5,14 @@ import d18_webpack from 'tmp-abhishek-debug/dm18_webpack4/StyledFirebaseAuth';
 import d18_nonjsx from 'tmp-abhishek-debug/dm18_nonjsx/StyledFirebaseAuth';
 
 import dd18_wp5_njx from 'tmp-abhishek-debug/dd18_wp5_njx/StyledFirebaseAuth';
+import dd18_wp5_njx_nolibname from 'tmp-abhishek-debug/dd18_wp5_njx_nolibname/StyledFirebaseAuth';
 
 const debugObj = {
     d14, d16, d18,
     d18_webpack,
     d18_nonjsx,
-    dd18_wp5_njx
+    dd18_wp5_njx,
+    dd18_wp5_njx_nolibname,
 };
 
 export default function doDebug() {
