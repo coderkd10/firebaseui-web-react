@@ -1,4 +1,4 @@
-ARG NODE_VERSION=16
+ARG NODE_VERSION=18
 
 FROM node:${NODE_VERSION} as builder
 
@@ -15,7 +15,7 @@ RUN npm run clean \
     && npm run build
 
 # generate asset for export
-ARG OUT_DIRNAME=dm16
+ARG OUT_DIRNAME=dm18
 RUN mkdir ../build \
     && cd ../build \
     && mkdir ${OUT_DIRNAME} \
