@@ -16,7 +16,7 @@ RUN npm run clean \
     && npm run build
 
 # generate asset for export
-ARG OUT_DIRNAME=dm18_webpack4
+ARG OUT_DIRNAME=dm18_nonjsx
 RUN mkdir ../build \
     && cd ../build \
     && mkdir ${OUT_DIRNAME} \
