@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "name": "webpack-bundle-tools",
+  "version": "0.0.1",
+  "dependencies": {
+    "acorn": "^8.11.2",
+    "strip-comments": "^2.0.1"
+  }
+}
