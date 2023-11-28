@@ -1,4 +1,4 @@
-ARG NODE_VERSION=16
+ARG NODE_VERSION=18
 
 FROM node:${NODE_VERSION}
 RUN apt update
@@ -7,13 +7,13 @@ USER node
 WORKDIR /home/node/app
 
 # copy files from dist
-COPY --chown=node dist ./dist/
-RUN cd dist && rm package-lock.json && npm install --only=production
-
+COPY --chown=node dist ./dist
+RUN npm pack ./dist
+     
 # copy package.json and package-lock.json
 COPY --chown=node example/package.json ./example/
 RUN cd example && npm install
-RUN cd example && npm install ../dist
+RUN cd example && npm install ../react-firebaseui-6.0.0.tgz
 
 COPY --chown=node example ./example
 # build example

@@ -21,6 +21,11 @@ import ReactDOM from 'react-dom';
 // Firebase.
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+
+// works without the styled import
+// import StyledFirebaseAuth from 'react-firebaseui/FirebaseAuth';
+
+// fails with this styled import
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 // Styles
@@ -77,7 +82,7 @@ class App extends React.Component {
         <div className={styles.logo}>
           <i className={styles.logoIcon + ' material-icons'}>photo</i> My App
         </div>
-        <div className={styles.caption}>This is a cool demo app</div>
+        <div className={styles.caption}>This is a cool demo app 2</div>
         {this.state.isSignedIn !== undefined && !this.state.isSignedIn &&
           <div>
             <StyledFirebaseAuth className={styles.firebaseUi} uiConfig={this.uiConfig}

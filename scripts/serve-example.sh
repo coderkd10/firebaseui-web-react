@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
 docker build -t rfb-example:build . -f Dockerfile.example
 docker run -it --rm --publish 8000:8000 --name cont-example-1  rfb-example:build
