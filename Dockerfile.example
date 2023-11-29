@@ -6,16 +6,35 @@ RUN apt update
 USER node
 WORKDIR /home/node/app
 
-# copy files from dist
-COPY --chown=node dist ./dist
-RUN npm pack ./dist
-     
 # copy package.json and package-lock.json
 COPY --chown=node example/package.json ./example/
 RUN cd example && npm install
+
+# copy example src files
+COPY --chown=node example ./example
+# add firebase config
+COPY <<-EOT ./example/src/firebase-config.json
+{
+    "status": "success",
+    "result": {
+      "sdkConfig": {
+        "projectId": "learning-app-e439f",
+        "appId": "1:175285642109:web:acf57532744814f1592214",
+        "storageBucket": "learning-app-e439f.appspot.com",
+        "apiKey": "AIzaSyDBIZounpofT12CtvYa1DRGsimcdrK5wN8",
+        "authDomain": "learning-app-e439f.firebaseapp.com",
+        "messagingSenderId": "175285642109",
+        "measurementId": "G-PEWRTCSGJ9"
+      }
+    }
+}
+EOT
+
+# install lib locally
+COPY --chown=node dist ./dist
+RUN npm pack ./dist
 RUN cd example && npm install ../react-firebaseui-6.0.0.tgz
 
-COPY --chown=node example ./example
 # build example
 RUN cd example && npm run build
 
