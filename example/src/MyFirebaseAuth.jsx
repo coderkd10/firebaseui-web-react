@@ -1,23 +1,60 @@
 import React, { useState } from 'react';
 
+function _objectWithoutProperties(srcObj, excluded) {
+    // hack since we don't have object rest spread
+    // adapted from @babel/plugin-transform-object-rest-spread
+    const out = {};
+    for (let key of Object.keys(srcObj)) {
+        if (excluded.indexOf(key) === -1) {
+            out[key] = srcObj[key];
+        }
+    }
+    return out;
+}
+
 function getQueryParam(key) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(key);
 }
 
-function updateQueryParamAndRefresh(key, value) {
+function getUpdatedQueryParams(key, value) {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set(key, value);
+    return urlParams;
+}
+
+function updateQueryParamAndRefresh(key, value) {
+    const urlParams = getUpdatedQueryParams(key, value);
     window.location.search = urlParams;
 }
 
-function useBooleanQueryParam(key) {
+function updateUrlWithoutReload(key, valueBool) {
+    const value = valueBool ? "1" : "0";
+    const newState = _objectWithoutProperties(window.history.state || {}, []);
+    newState[key] = value;
+    const newUrl = "?" + getUpdatedQueryParams(key, value).toString();
+    window.history.pushState(newState, window.document.title, newUrl);
+}
+
+function useBooleanQueryParamWithReload(key) {
     const currentValue = getQueryParam(key) === "1";
+    updateUrlWithoutReload(key, currentValue);
+
     const toggle = () => {
         const newValue = currentValue ? "0" : "1";
         updateQueryParamAndRefresh(key, newValue);
     }
     return [ currentValue, toggle ]
+}
+
+function useBooleanQueryParamWithoutReload(key) {
+    const [ valueBool, setValue ] = useState(getQueryParam(key) === "1");
+    updateUrlWithoutReload(key, valueBool);
+
+    const toggle = () => {
+        setValue(v => !v);
+    }
+    return [ valueBool, toggle ];
 }
 
 function Checkbox({ trueLabel, falseLabel, value, onToggle }) {
@@ -60,13 +97,15 @@ function getAuthComponent(shouldLoadViaIndex, shouldUseStyledComponent) {
 }
 
 export default function MyFirebaseAuth(props) {
-    const [ shouldRender, setShouldRender ] = useState(true);
-    const [ shouldLoadViaIndex, setShouldLoadViaIndex  ] = useState(false);
-    const [ shouldUseStyledComponent, toggleUseStyledComponent ] = useBooleanQueryParam("styled");
+    const [ noRender, toggleRender ] = useBooleanQueryParamWithoutReload("norender");
+    const [ shouldLoadViaIndex, toggleLoadViaIndex ] = useBooleanQueryParamWithoutReload("index");
+    const [ shouldUseStyledComponent, toggleUseStyledComponent ] = useBooleanQueryParamWithReload("styled");
+
+    const shouldRender = !noRender;
 
     let authUI = <span>Auth UI not being rendered</span>;
     if (shouldRender) {
-        const AuthComponent = getAuthComponent(setShouldLoadViaIndex, shouldUseStyledComponent);
+        const AuthComponent = getAuthComponent(shouldLoadViaIndex, shouldUseStyledComponent);
         authUI = <AuthComponent {...props}/>
     }
 
@@ -75,13 +114,13 @@ export default function MyFirebaseAuth(props) {
         <Checkbox 
             trueLabel="should render auth UI"
             value={shouldRender}
-            onToggle={() => { setShouldRender(v => !v) }}
+            onToggle={toggleRender}
         />
         <Checkbox 
             trueLabel="load via index.js"
             falseLabel="[component].js"
             value={shouldLoadViaIndex}
-            onToggle={() => { setShouldLoadViaIndex(v => !v) }}
+            onToggle={toggleLoadViaIndex}
         />
         <Checkbox 
             trueLabel="use StyledFirebaseAuth"
