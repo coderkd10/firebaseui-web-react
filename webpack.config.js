@@ -25,8 +25,10 @@ const config = {
     filename: 'StyledFirebaseAuth.js',
     path: path.resolve(__dirname, './dist'),
     library: {
-      type: 'commonjs2',
+      name: 'StyledFirebaseAuth',
+      type: 'umd',
     },
+    globalObject: 'this'
   },
   externals: {
     'react': 'react',

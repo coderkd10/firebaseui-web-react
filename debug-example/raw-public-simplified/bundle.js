@@ -45804,7 +45804,15 @@ function getFirebaseui() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/******/ (() => { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+  console.log("==> typeof exports = ", (typeof exports));
+  console.log("==> typeof module = ", (typeof exports));
+
+	if(true)
+		module.exports = factory(__webpack_require__(/*! firebaseui */ "./node_modules/firebaseui/dist/esm.js"), __webpack_require__(/*! react */ "./node_modules/react/index.js"));
+	else {}
+})(this, (__WEBPACK_EXTERNAL_MODULE_firebaseui__, __WEBPACK_EXTERNAL_MODULE_react__) => {
+return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
@@ -45814,7 +45822,7 @@ function getFirebaseui() {
   \*****************************/
 /***/ ((module) => {
 
-module.exports = __webpack_require__(/*! firebaseui */ "./node_modules/firebaseui/dist/esm.js");
+module.exports = __WEBPACK_EXTERNAL_MODULE_firebaseui__;
 
 /***/ }),
 
@@ -45824,7 +45832,7 @@ module.exports = __webpack_require__(/*! firebaseui */ "./node_modules/firebaseu
   \************************/
 /***/ ((module) => {
 
-module.exports = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+module.exports = __WEBPACK_EXTERNAL_MODULE_react__;
 
 /***/ })
 
@@ -45892,9 +45900,10 @@ function getFirebaseui() {
 }
 })();
 
-module.exports = __webpack_exports__;
+/******/ 	return __webpack_exports__;
 /******/ })()
 ;
+});
 //# sourceMappingURL=StyledFirebaseAuth.js.map
 
 /***/ }),

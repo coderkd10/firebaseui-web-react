@@ -1,4 +1,17 @@
-/******/ (() => { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+  console.log("==> typeof exports = ", (typeof exports));
+  console.log("==> typeof module = ", (typeof exports));
+
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("firebaseui"), require("react"));
+	else if(typeof define === 'function' && define.amd)
+		define(["firebaseui", "react"], factory);
+	else if(typeof exports === 'object')
+		exports["StyledFirebaseAuth"] = factory(require("firebaseui"), require("react"));
+	else
+		root["StyledFirebaseAuth"] = factory(root["firebaseui"], root["react"]);
+})(this, (__WEBPACK_EXTERNAL_MODULE_firebaseui__, __WEBPACK_EXTERNAL_MODULE_react__) => {
+return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
@@ -8,7 +21,7 @@
   \*****************************/
 /***/ ((module) => {
 
-module.exports = require("firebaseui");
+module.exports = __WEBPACK_EXTERNAL_MODULE_firebaseui__;
 
 /***/ }),
 
@@ -18,7 +31,7 @@ module.exports = require("firebaseui");
   \************************/
 /***/ ((module) => {
 
-module.exports = require("react");
+module.exports = __WEBPACK_EXTERNAL_MODULE_react__;
 
 /***/ })
 
@@ -86,7 +99,8 @@ function getFirebaseui() {
 }
 })();
 
-module.exports = __webpack_exports__;
+/******/ 	return __webpack_exports__;
 /******/ })()
 ;
+});
 //# sourceMappingURL=StyledFirebaseAuth.js.map
