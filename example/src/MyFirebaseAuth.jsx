@@ -1,17 +1,5 @@
 import React, { useState } from 'react';
 
-function _objectWithoutProperties(srcObj, excluded) {
-    // hack since we don't have object rest spread
-    // adapted from @babel/plugin-transform-object-rest-spread
-    const out = {};
-    for (let key of Object.keys(srcObj)) {
-        if (excluded.indexOf(key) === -1) {
-            out[key] = srcObj[key];
-        }
-    }
-    return out;
-}
-
 function getQueryParam(key) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(key);
