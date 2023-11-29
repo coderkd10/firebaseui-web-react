@@ -12,6 +12,17 @@ function _objectWithoutProperties(srcObj, excluded) {
     return out;
 }
 
+function getQueryParam(key) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(key);
+}
+
+function updateQueryParamAndRefresh(key, value) {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set(key, value);
+    window.location.search = urlParams;
+}
+
 function MyFbAuthProxy(props) {
     // for some reason this syntax isn't working!
     // const { useStyled, ...downstreamProps } = props;
@@ -34,15 +45,15 @@ function MyFbAuthProxy(props) {
 }
 
 export default function MyFirebaseAuth(props) {
-    const [ checked, setChecked ] = useState(true);
+    const isStyled = getQueryParam("styled") === "1";
 
     return <div>
         <label>
-            <input type='checkbox' checked={checked} onChange={() => {
-                setChecked(value => !value);
+            <input type='checkbox' checked={isStyled} onChange={() => {
+                updateQueryParamAndRefresh("styled", isStyled ? "0" : "1");
             }}/>
             Use Styled (webpacked compiled with inline styles) Component ?
         </label>
-        <MyFbAuthProxy useStyled={checked} {...props} />
+        <MyFbAuthProxy useStyled={isStyled} {...props} />
     </div>
 }
