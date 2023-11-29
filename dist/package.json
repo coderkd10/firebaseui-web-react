@@ -19,7 +19,8 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "NODE_ENV=development webpack --mode development && babel src --out-dir dist -s && cp ./types/* README.md LICENSE package.json dist && cd dist && npm install --only=production && cd -"
+    "build": "webpack -p && babel src --out-dir dist -s && cp ./types/* README.md LICENSE package.json dist && cd dist && npm install --only=production && cd -",
+    "pub": "npm run clean && npm run build && npm publish dist"
   },
   "author": "Google",
   "repository": {
@@ -28,39 +29,43 @@
   },
   "license": "Apache-2.0",
   "peerDependencies": {
-    "react": ">=15",
-    "firebase": ">=9"
+    "react": ">=15 <=17",
+    "firebase": "^9.1.3"
   },
   "dependencies": {
-    "firebaseui": "^6.1.0"
+    "firebaseui": "^6.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18",
-    "@babel/cli": "^7.23.4",
-    "@babel/core": "^7.23.3",
-    "@babel/eslint-parser": "^7.23.3",
-    "babel-loader": "^9.1.3",
-    "@babel/plugin-transform-class-properties": "^7.23.3",
-    "@babel/plugin-transform-object-rest-spread": "^7.23.4",
-    "@babel/preset-env": "^7.23.3",
-    "@babel/preset-flow": "^7.23.3",
-    "@babel/preset-react": "^7.23.3",
-    "css-loader": "^6.8.1",
-    "eslint": "^8.54.0",
-    "eslint-config-google": "^0.14.0",
+    "@types/react": "^17.0.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-remove-comments": "^2.0.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
+    "eslint-config-google": "^0.9.1",
     "eslint-config-react": "^1.1.7",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-config-standard-react": "^13.0.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-react": "^6.0.0",
     "eslint-plugin-flow": "^2.29.1",
-    "eslint-plugin-flowtype": "^8.0.3",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.33.2",
-    "react": "^18",
-    "style-loader": "^3.3.3",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
+    "eslint-plugin-flowtype": "^2.50.3",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-react": "^7.8.2",
+    "eslint-plugin-standard": "^3.1.0",
+    "react": "^17.0.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   }
 }
