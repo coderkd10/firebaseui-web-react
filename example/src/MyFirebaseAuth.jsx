@@ -23,37 +23,84 @@ function updateQueryParamAndRefresh(key, value) {
     window.location.search = urlParams;
 }
 
-function MyFbAuthProxy(props) {
-    // for some reason this syntax isn't working!
-    // const { useStyled, ...downstreamProps } = props;
-
-    const useStyled = props.useStyled;
-    const downstreamProps = _objectWithoutProperties(props, ['useStyled']);
-
-    if (useStyled) {
-        const FirebaseAuth = require('react-firebaseui/FirebaseAuth').default;
-        return <div>
-            <span>{"{rendered uncompiled verion ...}"}</span>
-            <FirebaseAuth {...downstreamProps} />
-        </div>
+function useBooleanQueryParam(key) {
+    const currentValue = getQueryParam(key) === "1";
+    const toggle = () => {
+        const newValue = currentValue ? "0" : "1";
+        updateQueryParamAndRefresh(key, newValue);
     }
-    const StyledFirebaseAuth = require('react-firebaseui/StyledFirebaseAuth').default;
+    return [ currentValue, toggle ]
+}
+
+function Checkbox({ trueLabel, falseLabel, value, onToggle }) {
+    if (value) {
+        trueLabel = <b>{trueLabel}</b>
+    } else if (falseLabel) {
+        falseLabel = <b>{falseLabel}</b>
+    }
+    let label = <React.Fragment>{trueLabel} ?</React.Fragment>
+    if (falseLabel) {
+        label = <React.Fragment>{trueLabel} ? (otherwise {falseLabel}) </React.Fragment>
+    }
     return <div>
-        <span>{"{rendered webpack compiled verion ...}"}</span>
-        <StyledFirebaseAuth {...downstreamProps} />
+        <label>
+            <input type='checkbox' checked={value} onChange={() => {
+                onToggle()
+            }}/>
+            {label}
+        </label>
     </div>
 }
 
+function getAuthComponent(shouldLoadViaIndex, shouldUseStyledComponent) {
+    if (shouldLoadViaIndex) {
+        const lib = require('react-firebaseui');
+        if (shouldUseStyledComponent) {
+            return lib.StyledFirebaseAuth;
+        } else {
+            return lib.FirebaseAuth;
+        }
+    } else {
+        if (shouldUseStyledComponent) {
+            const StyledFirebaseAuth = require('react-firebaseui/StyledFirebaseAuth').default;
+            return StyledFirebaseAuth;
+        } else {
+            const FirebaseAuth = require('react-firebaseui/FirebaseAuth').default;
+            return FirebaseAuth;
+        }
+    }
+}
+
 export default function MyFirebaseAuth(props) {
-    const isStyled = getQueryParam("styled") === "1";
+    const [ shouldRender, setShouldRender ] = useState(true);
+    const [ shouldLoadViaIndex, setShouldLoadViaIndex  ] = useState(false);
+    const [ shouldUseStyledComponent, toggleUseStyledComponent ] = useBooleanQueryParam("styled");
+
+    let authUI = <span>Auth UI not being rendered</span>;
+    if (shouldRender) {
+        const AuthComponent = getAuthComponent(setShouldLoadViaIndex, shouldUseStyledComponent);
+        authUI = <AuthComponent {...props}/>
+    }
 
     return <div>
-        <label>
-            <input type='checkbox' checked={isStyled} onChange={() => {
-                updateQueryParamAndRefresh("styled", isStyled ? "0" : "1");
-            }}/>
-            Use Styled (webpacked compiled with inline styles) Component ?
-        </label>
-        <MyFbAuthProxy useStyled={isStyled} {...props} />
+        <code>{JSON.stringify({ shouldRender, shouldLoadViaIndex, shouldUseStyledComponent }, null, 2)}</code>
+        <Checkbox 
+            trueLabel="should render auth UI"
+            value={shouldRender}
+            onToggle={() => { setShouldRender(v => !v) }}
+        />
+        <Checkbox 
+            trueLabel="load via index.js"
+            falseLabel="[component].js"
+            value={shouldLoadViaIndex}
+            onToggle={() => { setShouldLoadViaIndex(v => !v) }}
+        />
+        <Checkbox 
+            trueLabel="use StyledFirebaseAuth"
+            falseLabel="FirebaseAuth"
+            value={shouldUseStyledComponent}
+            onToggle={toggleUseStyledComponent}
+        />
+        {authUI}
     </div>
 }
