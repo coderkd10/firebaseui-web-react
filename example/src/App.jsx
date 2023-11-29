@@ -26,7 +26,7 @@ import 'firebase/compat/auth';
 // import StyledFirebaseAuth from 'react-firebaseui/FirebaseAuth';
 
 // fails with this styled import
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
+import StyledFirebaseAuth from './MyFirebaseAuth';
 
 // Styles
 import styles from './app.css'; // This uses CSS modules.
