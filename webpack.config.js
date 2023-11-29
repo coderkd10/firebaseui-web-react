@@ -27,8 +27,9 @@ const config = {
     library: {
       name: 'StyledFirebaseAuth',
       type: 'umd',
+      umdNamedDefine: true,
     },
-    globalObject: 'this'
+    globalObject: 'this',
   },
   externals: {
     'react': 'react',
