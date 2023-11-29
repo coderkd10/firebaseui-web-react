@@ -46,6 +46,14 @@ const config = {
   module: {
     rules: [
       {
+        include: path.resolve(__dirname, './src/FirebaseAuth.jsx'),
+        loader: 'string-replace-loader',
+        options: {
+          search: '$orig:FirebaseAuth_',
+          replace: '$wp:StyledFirebaseAuth_',
+        }
+      },
+      {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
