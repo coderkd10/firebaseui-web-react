@@ -1,4 +1,4 @@
-ARG NODE_VERSION=18
+ARG NODE_VERSION=16
 
 FROM node:${NODE_VERSION}
 RUN apt update
@@ -17,7 +17,7 @@ RUN cd example && npm install ../react-firebaseui-6.0.0.tgz
 
 COPY --chown=node example ./example
 # build example
-RUN cd example && NODE_OPTIONS=--openssl-legacy-provider npm run build:prod
+RUN cd example && npm run build:prod
 
 # start the static server
 EXPOSE 8000
