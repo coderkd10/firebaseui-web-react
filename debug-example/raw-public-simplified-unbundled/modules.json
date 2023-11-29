@@ -3,88 +3,8 @@
   "bundle": "../raw-public-simplified/bundle.js",
   "modules": [
     {
-      "moduleName": "./node_modules/@firebase/app-compat/dist/esm/index.esm2017.js",
-      "fileName": "f.__node_modules__@firebase__app-compat__dist__esm__index.esm2017.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/@firebase/app/dist/esm/index.esm2017.js",
-      "fileName": "f.__node_modules__@firebase__app__dist__esm__index.esm2017.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/@firebase/auth-compat/dist/index.esm2017.js",
-      "fileName": "f.__node_modules__@firebase__auth-compat__dist__index.esm2017.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/@firebase/auth/dist/esm2017/index-e3d5d3f4.js",
-      "fileName": "f.__node_modules__@firebase__auth__dist__esm2017__index-e3d5d3f4.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/@firebase/auth/dist/esm2017/internal.js",
-      "fileName": "f.__node_modules__@firebase__auth__dist__esm2017__internal.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/@firebase/component/dist/esm/index.esm2017.js",
-      "fileName": "f.__node_modules__@firebase__component__dist__esm__index.esm2017.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/@firebase/logger/dist/esm/index.esm2017.js",
-      "fileName": "f.__node_modules__@firebase__logger__dist__esm__index.esm2017.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/@firebase/util/dist/index.esm2017.js",
-      "fileName": "f.__node_modules__@firebase__util__dist__index.esm2017.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/dialog-polyfill/dialog-polyfill.js",
-      "fileName": "f.__node_modules__dialog-polyfill__dialog-polyfill.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/firebase/compat/app/dist/esm/index.esm.js",
-      "fileName": "f.__node_modules__firebase__compat__app__dist__esm__index.esm.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/firebase/compat/auth/dist/esm/index.esm.js",
-      "fileName": "f.__node_modules__firebase__compat__auth__dist__esm__index.esm.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/firebaseui/dist/esm.js",
-      "fileName": "f.__node_modules__firebaseui__dist__esm.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/idb/build/index.js",
-      "fileName": "f.__node_modules__idb__build__index.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/idb/build/wrap-idb-value.js",
-      "fileName": "f.__node_modules__idb__build__wrap-idb-value.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/material-design-lite/src/button/button.js",
-      "fileName": "f.__node_modules__material-design-lite__src__button__button.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/material-design-lite/src/mdlComponentHandler.js",
-      "fileName": "f.__node_modules__material-design-lite__src__mdlComponentHandler.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/material-design-lite/src/progress/progress.js",
-      "fileName": "f.__node_modules__material-design-lite__src__progress__progress.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/material-design-lite/src/spinner/spinner.js",
-      "fileName": "f.__node_modules__material-design-lite__src__spinner__spinner.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/material-design-lite/src/textfield/textfield.js",
-      "fileName": "f.__node_modules__material-design-lite__src__textfield__textfield.js__.js"
-    },
-    {
       "moduleName": "./node_modules/object-assign/index.js",
       "fileName": "f.__node_modules__object-assign__index.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/process/browser.js",
-      "fileName": "f.__node_modules__process__browser.js__.js"
     },
     {
       "moduleName": "./node_modules/react-dom/cjs/react-dom.development.js",
@@ -127,18 +47,6 @@
       "fileName": "f.__node_modules__scheduler__tracing.js__.js"
     },
     {
-      "moduleName": "./node_modules/tslib/tslib.es6.js",
-      "fileName": "f.__node_modules__tslib__tslib.es6.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/webpack/buildin/amd-define.js",
-      "fileName": "f.__node_modules__webpack__buildin__amd-define.js__.js"
-    },
-    {
-      "moduleName": "./node_modules/webpack/buildin/global.js",
-      "fileName": "f.__node_modules__webpack__buildin__global.js__.js"
-    },
-    {
       "moduleName": "./src/App.jsx",
       "fileName": "f.__src__App.jsx__.js"
     },
@@ -149,14 +57,6 @@
     {
       "moduleName": "./src/app.css",
       "fileName": "f.__src__app.css__.js"
-    },
-    {
-      "moduleName": "./src/firebase-config.json",
-      "fileName": "f.__src__firebase-config.json__.js"
-    },
-    {
-      "moduleName": "./src/firebaseui-styling.global.css",
-      "fileName": "f.__src__firebaseui-styling.global.css__.js"
     }
   ]
 }

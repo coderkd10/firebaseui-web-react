@@ -3,7 +3,6 @@
 exports.__esModule = true;
 exports.AnotherComp = AnotherComp;
 exports.default = void 0;
-exports.getFirebaseui = getFirebaseui;
 var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
@@ -21,9 +20,5 @@ var FirebaseAuth = exports.default = function (_React$Component) {
 }(_react.default.Component);
 function AnotherComp() {
   return _react.default.createElement("h1", null, "THIS IS A SIMPLE FUNCTIONAL COMPONENT");
-}
-function getFirebaseui() {
-  var firebaseui = require('firebaseui');
-  return firebaseui;
 }
 //# sourceMappingURL=FirebaseAuth.js.map

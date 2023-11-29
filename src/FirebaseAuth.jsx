@@ -18,8 +18,3 @@ export function AnotherComp() {
     <h1>THIS IS A SIMPLE FUNCTIONAL COMPONENT</h1>
   )
 }
-
-export function getFirebaseui() {
-  const firebaseui = require('firebaseui');
-  return firebaseui;
-}

@@ -1,29 +1,16 @@
 (function webpackUniversalModuleDefinition(root, factory) {
-  console.log("==> typeof exports = ", (typeof exports));
-  console.log("==> typeof module = ", (typeof exports));
-
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("firebaseui"), require("react"));
+		module.exports = factory(require("react"));
 	else if(typeof define === 'function' && define.amd)
-		define(["firebaseui", "react"], factory);
+		define(["react"], factory);
 	else if(typeof exports === 'object')
-		exports["StyledFirebaseAuth"] = factory(require("firebaseui"), require("react"));
+		exports["StyledFirebaseAuth"] = factory(require("react"));
 	else
-		root["StyledFirebaseAuth"] = factory(root["firebaseui"], root["react"]);
-})(this, (__WEBPACK_EXTERNAL_MODULE_firebaseui__, __WEBPACK_EXTERNAL_MODULE_react__) => {
+		root["StyledFirebaseAuth"] = factory(root["react"]);
+})(this, (__WEBPACK_EXTERNAL_MODULE_react__) => {
 return /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
-
-/***/ "firebaseui":
-/*!*****************************!*\
-  !*** external "firebaseui" ***!
-  \*****************************/
-/***/ ((module) => {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_firebaseui__;
-
-/***/ }),
 
 /***/ "react":
 /*!************************!*\
@@ -74,7 +61,6 @@ var exports = __webpack_exports__;
 exports.__esModule = true;
 exports.AnotherComp = AnotherComp;
 exports["default"] = void 0;
-exports.getFirebaseui = getFirebaseui;
 var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; _setPrototypeOf(subClass, superClass); }
@@ -92,10 +78,6 @@ var FirebaseAuth = exports["default"] = function (_React$Component) {
 }(_react.default.Component);
 function AnotherComp() {
   return _react.default.createElement("h1", null, "THIS IS A SIMPLE FUNCTIONAL COMPONENT");
-}
-function getFirebaseui() {
-  var firebaseui = __webpack_require__(/*! firebaseui */ "firebaseui");
-  return firebaseui;
 }
 })();
 
