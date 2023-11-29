@@ -17,7 +17,7 @@ RUN cd example && npm install ../react-firebaseui-6.0.0.tgz
 
 COPY --chown=node example ./example
 # build example
-RUN cd example && npm run build:prod
+RUN cd example && npm run build
 
 # start the static server
 EXPOSE 8000
