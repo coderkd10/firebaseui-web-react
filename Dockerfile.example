@@ -17,7 +17,7 @@ RUN cd example && npm install ../react-firebaseui-6.0.0.tgz
 
 COPY --chown=node example ./example
 # build example
-RUN cd example && npm run build
+RUN cd example && NODE_OPTIONS=--openssl-legacy-provider npm run build:prod
 
 # start the static server
 EXPOSE 8000
