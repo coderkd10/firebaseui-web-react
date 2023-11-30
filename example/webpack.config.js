@@ -41,7 +41,7 @@ const config = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        exclude: [/node_modules/, path.resolve(__dirname, './src/proxy/')],
         include: path.resolve(__dirname, './src'),
       },
       {

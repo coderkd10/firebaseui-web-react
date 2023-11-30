@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import withProxy from './pui-hoc';
 
 function _objectWithoutProperties(srcObj, excluded) {
     // hack since we don't have object rest spread
@@ -77,27 +78,13 @@ function Checkbox({ trueLabel, falseLabel, value, onToggle }) {
     </div>
 }
 
-function getAuthComponent(shouldLoadViaIndex, shouldUseStyledComponent) {
-    if (shouldLoadViaIndex) {
-        const lib = require('react-firebaseui');
-        if (shouldUseStyledComponent) {
-            return lib.StyledFirebaseAuth;
-        } else {
-            return lib.FirebaseAuth;
-        }
-    } else {
-        if (shouldUseStyledComponent) {
-            const StyledFirebaseAuth = require('react-firebaseui/StyledFirebaseAuth').default;
-            return StyledFirebaseAuth;
-        } else {
-            const FirebaseAuth = require('react-firebaseui/FirebaseAuth').default;
-            return FirebaseAuth;
-        }
-    }
+function getAuthComponent(shouldLoadViaRequire, shouldLoadViaIndex, shouldUseStyledComponent) {
+    return withProxy(shouldLoadViaRequire, shouldLoadViaIndex, shouldUseStyledComponent);
 }
 
 export default function MyFirebaseAuth(props) {
     const [ noRender, toggleRender ] = useBooleanQueryParamWithoutReload("norender");
+    const [ shouldLoadViaRequire, toggleLoadViaRequire ] = useBooleanQueryParamWithoutReload("require");
     const [ shouldLoadViaIndex, toggleLoadViaIndex ] = useBooleanQueryParamWithoutReload("index");
     const [ shouldUseStyledComponent, toggleUseStyledComponent ] = useBooleanQueryParamWithReload("styled");
 
@@ -105,16 +92,22 @@ export default function MyFirebaseAuth(props) {
 
     let authUI = <span>Auth UI not being rendered</span>;
     if (shouldRender) {
-        const AuthComponent = getAuthComponent(shouldLoadViaIndex, shouldUseStyledComponent);
+        const AuthComponent = getAuthComponent(shouldLoadViaRequire, shouldLoadViaIndex, shouldUseStyledComponent);
         authUI = <AuthComponent {...props}/>
     }
 
     return <div>
-        <code>{JSON.stringify({ shouldRender, shouldLoadViaIndex, shouldUseStyledComponent }, null, 2)}</code>
+        <code>{JSON.stringify({ shouldRender, shouldLoadViaRequire, shouldLoadViaIndex, shouldUseStyledComponent }, null, 2)}</code>
         <Checkbox 
             trueLabel="should render auth UI"
             value={shouldRender}
             onToggle={toggleRender}
+        />
+        <Checkbox 
+            trueLabel="use require"
+            falseLabel={"import"}
+            value={shouldLoadViaRequire}
+            onToggle={toggleLoadViaRequire}
         />
         <Checkbox 
             trueLabel="load via index.js"
