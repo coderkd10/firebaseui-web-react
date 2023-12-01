@@ -31,6 +31,11 @@ function updateQueryParamAndRefresh(key, value) {
 
 function updateUrlWithoutReload(key, valueBool) {
     const value = valueBool ? "1" : "0";
+    if (getQueryParam(key) === value) {
+        // already in the correct url state
+        // pushState not required
+        return;
+    }
     const newState = _objectWithoutProperties(window.history.state || {}, []);
     newState[key] = value;
     const newUrl = "?" + getUpdatedQueryParams(key, value).toString();
