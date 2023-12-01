@@ -23,6 +23,7 @@ const ELEMENT_ID = 'firebaseui_container';
 // Promise that resolves unless the FirebaseUI instance is currently being deleted.
 let firebaseUiDeletion = Promise.resolve();
 
+let instanceCount = 0;
 /**
  * React Component wrapper for the FirebaseUI Auth widget.
  */
@@ -41,12 +42,17 @@ export default class FirebaseAuth extends React.Component {
     this.className = props.className;
     this.uiCallback = props.uiCallback;
     this.unregisterAuthObserver = () => {};
+
+    this._name = `$orig:FirebaseAuth_${instanceCount}`;
+    instanceCount += 1;
   }
 
   /**
    * @inheritDoc
    */
   componentDidMount() {
+    console.log('[debug:FirebaseAuth.jsx] componentDidMount: ', this._name);
+
     // Import the css only on the client.
     require('firebaseui/dist/firebaseui.css');
 
@@ -87,10 +93,17 @@ export default class FirebaseAuth extends React.Component {
    * @inheritDoc
    */
   componentWillUnmount() {
+    console.log('[debug:FirebaseAuth.jsx] componentWillUnmount: ', this._name);
+
     firebaseUiDeletion = firebaseUiDeletion.then(() => {
       this.unregisterAuthObserver();
       return this.firebaseUiWidget.delete();
     });
+    
+    firebaseUiDeletion.then(() => {
+      console.log('[debug:FirebaseAuth.jsx] firebase ui deletion completed: ', this._name);
+    })
+
     return firebaseUiDeletion;
   }
 
@@ -115,7 +128,10 @@ export default class FirebaseAuth extends React.Component {
    */
   render() {
     return (
+      <>
+      <h3>Instance Name: {this._name}</h3>
       <div className={this.className} id={ELEMENT_ID}/>
+      </>
     );
   }
 }

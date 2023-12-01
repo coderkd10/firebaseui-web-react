@@ -24,8 +24,12 @@ const config = {
   output: {
     filename: 'StyledFirebaseAuth.js',
     path: path.resolve(__dirname, './dist'),
-    library: 'StyledFirebaseAuth',
-    libraryTarget: 'commonjs2',
+    library: {
+      name: 'StyledFirebaseAuth',
+      type: 'umd',
+      umdNamedDefine: true,
+    },
+    globalObject: 'this',
   },
   externals: {
     'react': 'react',
@@ -42,6 +46,14 @@ const config = {
   },
   module: {
     rules: [
+      {
+        include: path.resolve(__dirname, './src/FirebaseAuth.jsx'),
+        loader: 'string-replace-loader',
+        options: {
+          search: '$orig:FirebaseAuth_',
+          replace: '$wp:StyledFirebaseAuth_',
+        }
+      },
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',

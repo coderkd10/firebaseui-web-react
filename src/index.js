@@ -19,3 +19,5 @@ import StyledFirebaseAuth from './StyledFirebaseAuth';
 
 exports.FirebaseAuth = FirebaseAuth;
 exports.StyledFirebaseAuth = StyledFirebaseAuth;
+
+console.log('[debug:index.js] lib-index.js loaded');
