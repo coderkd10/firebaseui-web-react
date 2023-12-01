@@ -16,7 +16,7 @@ export default function withProxy(useRequire, useIndex, useStyled) {
         })
 
     const ProxyUI = (props) => {
-        const [ loading, setLoading ] = useState(false);
+        const [ loading, setLoading ] = useState(true);
         const [ loadingSuccess, setLoadingSuccess ] = useState(false);
 
         useEffect(() => {

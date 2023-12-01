@@ -16,7 +16,7 @@
 
 // React core.
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 // Firebase.
 import firebase from 'firebase/compat/app';
@@ -96,4 +96,4 @@ class App extends React.Component {
 }
 
 // Load the app in the browser.
-ReactDOM.render(<App/>, document.getElementById('app'));
+createRoot(document.getElementById('app')).render(<App />);

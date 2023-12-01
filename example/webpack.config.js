@@ -16,7 +16,7 @@
 'use strict';
 
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const config = {
   context: __dirname,
@@ -24,6 +24,7 @@ const config = {
   entry: './src/App.jsx',
   output: {
     filename: 'bundle.js',
+    chunkFilename: 'bundle.chunk.[id].js',
     path: path.resolve(__dirname, './public'),
   },
   devtool: 'cheap-module-source-map',
@@ -35,9 +36,9 @@ const config = {
     reasons: true,
     chunks: true,
   },
-  plugins: [new ExtractTextPlugin({
+  plugins: [new MiniCssExtractPlugin({
     filename: './bundle.css',
-    allChunks: true,
+    chunkFilename: "./bundle.chunk.[id].css"
   })],
   module: {
     rules: [
@@ -50,40 +51,32 @@ const config = {
       {
         test: /\.css$/,
         exclude: [/\.global\./, /node_modules/],
-        loader: ExtractTextPlugin.extract(
+        use: [
+          MiniCssExtractPlugin.loader,
           {
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1,
-                  modules: true,
-                  autoprefixer: true,
-                  minimize: true,
-                  localIdentName: '[name]__[local]___[hash:base64:5]',
-                },
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
+                localIdentName: '[name]__[local]___[hash:base64:5]'
               },
-            ],
-          }),
+            },
+          },
+        ],
       },
       {
         test: /\.css/,
         include: [/\.global\./, /node_modules/],
-        loader: ExtractTextPlugin.extract(
+        use: [
+          MiniCssExtractPlugin.loader,
           {
-            fallback: 'style-loader',
-            use: [
-              {
-                loader: 'css-loader',
-                options: {
-                  importLoaders: 1,
-                  modules: false,
-                  minimize: true,
-                },
-              },
-            ],
-          }),
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: false,
+            },
+          },
+        ],
       },
     ],
   },

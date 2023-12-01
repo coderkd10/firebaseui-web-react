@@ -1,6 +1,19 @@
-ARG NODE_VERSION=16
+ARG LIB_BUILDER_NODE_VERSION=20
+ARG EXAMPLE_NODE_VERSION=16
 
-FROM node:${NODE_VERSION}
+FROM node:${LIB_BUILDER_NODE_VERSION} as lib-builder
+USER node
+WORKDIR /home/node/lib
+COPY --chown=node package.json ./
+COPY --chown=node package-lock.json ./
+RUN npm install
+COPY --chown=node . ./
+RUN npm run clean
+RUN npm run build
+RUN npm pack ./dist
+
+
+FROM node:${EXAMPLE_NODE_VERSION}
 RUN apt update
 
 USER node
@@ -31,8 +44,7 @@ COPY <<-EOT ./example/src/firebase-config.json
 EOT
 
 # install lib locally
-COPY --chown=node dist ./dist
-RUN npm pack ./dist
+COPY --chown=node --from=lib-builder /home/node/lib/react-firebaseui-6.0.0.tgz .
 RUN cd example && npm install ../react-firebaseui-6.0.0.tgz
 
 # build example
