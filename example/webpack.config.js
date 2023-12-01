@@ -35,7 +35,10 @@ const config = {
     reasons: true,
     chunks: true,
   },
-  plugins: [new ExtractTextPlugin('./bundle.css')],
+  plugins: [new ExtractTextPlugin({
+    filename: './bundle.css',
+    allChunks: true,
+  })],
   module: {
     rules: [
       {
